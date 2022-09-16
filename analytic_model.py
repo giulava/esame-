@@ -8,13 +8,13 @@ def model(x,a,b):
 	x is the independent variable, a and b are parameters.
 	"""
 
-  	return a+b*x 
+	return a+b*x 
 
 
 
 
 
-def noise(sigma,mu):
+def noise(mu,sigma):
 	"""
 	This function computes the noise to be superimposed to the model. 
 	sigma is the standard deviation and mu the mean of the gaussian.
