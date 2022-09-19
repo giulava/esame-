@@ -2,13 +2,13 @@ import numpy as np
 
 
 
-def model(x,a,b):
+def model(x,a,b,c):
 	"""
 	This function computes the analytic model that we will try to recover. 
 	x is the independent variable, a and b are parameters.
 	"""
 
-	return a+b*x 
+	return a*x**2+b*x+c 
 
 
 

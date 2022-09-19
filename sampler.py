@@ -13,7 +13,7 @@ def main():
 	start=0
 	end=1
 	n=5
-	params=(2,1)
+	params=(2,1,3)
 	sigma=1
 	print (fakedata(start,end,n,params,sigma))
 
