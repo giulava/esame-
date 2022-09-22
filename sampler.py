@@ -8,7 +8,7 @@ __version__ = '0.0.4'
 
 
 
-def likelihood(data,sigma=1,xn,params):
+def likelihood(data,xn,params,sigma=1):
 
 	L = np.exp(-0.5*(np.log(2*np.pi*sigma**2) + 0.5*(data - model(x, params))**2 / sigma**2 )  )
 	#verosimiglianza #
@@ -28,16 +28,19 @@ def prior(xn,inf,sup):
 
 
 def prob(data,sigma,xn,params,inf,sup):
+	if 0 < xn <= 1:
+		return xn**2 * ( 1 - xn**2 )**(7/2)
+	else:
+		return 1e-12
+	#p=likelihood(data,sigma,xn,params)*prior(xn,inf,sup)
 	
-	p=likelihood(data,sigma,xn,params)*prior(xn,inf,sup)
-	
-	return p
+	#return p
 
 
 
 
 
-def MCMC(sigma,data, start=0,end=5000,inf=0,sup=1) : 
+def MCMC(sigma,data,params,start=0,end=5000,inf=0,sup=1) : 
 	"""This function samples a random number, which steps resemble
 	a random walk."""
 
@@ -51,7 +54,7 @@ def MCMC(sigma,data, start=0,end=5000,inf=0,sup=1) :
 	burnin=1000
 	skip=2
 	sigma=1	
-	out=np.ones((end-burnin)/skip) 
+	out=np.ones(int((end-burnin)/skip)) 
 	#tolgo dalla lista dei numeri i primi 1000 estratti e ne prendo uno sì e uno no#
 	xn = start
 	saved=False
@@ -67,15 +70,15 @@ def MCMC(sigma,data, start=0,end=5000,inf=0,sup=1) :
 		else :
 			U = np.random.rand(1,1)
 		
-			if U<=controll
+			if U<=controll:
 				xn=xn1
 				#else xn=xn#
 		if i>burnin and saved==False : 
 			out[j]=xn
-			saved==True
+			saved=True
 			j+=1
 		elif saved==True:
-			saved==False
+			saved=False
 	return out		
 
 
