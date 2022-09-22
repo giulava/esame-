@@ -34,9 +34,8 @@ for i in range (end):
 		U = np.random.rand(1,1)
 		
 		if U<=controll
-			xn1_acc=xn1
-		else :
-			xn=xn1
+			xn1_acc=xn
+		
 
 
 
