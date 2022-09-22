@@ -4,7 +4,7 @@ from analytic_model import fakedata
 
 __author__ = 'Giulia Avato'
 __email__ = 'giulia.avato@studio.unibo.it'
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 
 
@@ -21,10 +21,23 @@ def main():
 
 
 MCMC(start=0,end=1000,inf=0,sup=1)
+	"""This function samples a random number undergo a random walk 
+	through the posterior distribution where the probability of 
+	moving to any given point is determined by the transition
+	of the Makov chain."""
+
+	"""
+	xn : starting position
+	controll : Metropolis ratio 
+	xn1_acc : accepted value 
+	U : uniform random number 
+	"""
+ 
 sigma=1
 xn = start
 
 for i in range (end):
+	
 	xn1= np.random.normal(xn,sigma)
 	controll =  prob(xn1,inf,sup)/prob(xn,inf,sup)
 
