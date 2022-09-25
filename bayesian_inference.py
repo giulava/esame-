@@ -9,17 +9,27 @@ __version__='0.0.4'
 
 
 def main():
-	start=2
-	end=5000
-	n=5
-	params=(2,1,3)
+	init_MCMC=2
+	itmax=100000
+	n=100
+	params=(1,)
 	sigma=1
-	data=fakedata(start,end,n,params,sigma)
-	r=MCMC(sigma,data,params,start=start,end=end,inf=0,sup=1)
-	print(r)
+	xstart=-1
+	xend=1
+	data,grid=fakedata(xstart,xend,n,params,sigma)
+	r,zeta,posterior=MCMC(sigma,data,grid,init_MCMC=init_MCMC,itmax=itmax,inf=0,sup=2)
 	plt.figure(figsize=(8, 4))
-	plt.hist(r, bins = 100, histtype='step', density = True, label='histogram')
+	plt.hist(posterior, bins = 100, histtype='step', density = True, label='histogram')
 	plt.show()
+	#print(np.quantile(posterior,0.5))
+	
+	q_16,q_50,q_84 = np.quantile(posterior, [0.16,0.5, 0.84], axis = 0)
+	q_m, q_p=q_50-q_16, q_84-q_50
+	print(f'{q_50}  + {q_p} - {q_m}')
+
+
+
+	
 
 
 

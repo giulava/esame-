@@ -2,13 +2,13 @@ import numpy as np
 
 
 
-def model(x,a,b,c):
+def model(x,b):
 	"""
 	This function computes the analytic model that we will try to recover. 
 	x is the independent variable, a and b are parameters.
 	"""
 
-	return a*x**2+b*x+c 
+	return b*x 
 
 
 
@@ -34,4 +34,4 @@ def fakedata(start,end,n,params,sigma):
 	grid=np.linspace(start,end,n)
 	data=model(grid,*params)
 	data+=noise(data,sigma)
-	return data
+	return data,grid
