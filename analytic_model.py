@@ -34,6 +34,6 @@ def fakedata(start,end,n,params,sigma):
 	
 	grid=np.linspace(start,end,n)
 	data=model(grid,params)
-	data+=noise(data,sigma)
+	data=noise(data,sigma)
 	
 	return data,grid

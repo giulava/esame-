@@ -9,18 +9,20 @@ __version__='0.1.0'
 
 
 def main():
-	init_MCMC=0
-	itmax=10000
-	n=100
-	params=(1,)
-	sigma=1
-	xstart=0
-	xend=1
-	data,grid=fakedata(xstart,xend,n,params,sigma)
-	r,zeta,posterior=MCMC(sigma,data,grid,init_MCMC=init_MCMC,itmax=itmax,inf=0,sup=2)
+	init_MCMC=0.5
+	itmax=100000
+	n=1000
+	params=(0.5,)
+	sigma=0.5
+	start=0
+	end=2
 	
-	plt.figure(figsize=(8, 4))
+	data,grid=fakedata(0,2,50,(0.5),0.5)
+	posterior=MCMC(sigma,data,grid,init_MCMC=init_MCMC,itmax=itmax,start=0,end=2)
+	
+	plt.figure()
 	plt.hist(posterior, bins = 100, histtype='step', density = True, label='histogram')
+	
 	plt.show()
 	#print(np.quantile(posterior,0.5))
 	
@@ -35,4 +37,6 @@ def main():
 
 
 if __name__=="__main__":
+	np.random.seed(1000) #togliere#
 	main()
+

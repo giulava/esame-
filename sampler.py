@@ -9,58 +9,60 @@ __version__ = '0.1.0'
 
 
 def likelihood(data,grid,xn,sigma):
-	L = np.exp(-0.5*sum(np.log(2*np.pi*sigma**2) + (data - model(grid,xn))**2 / sigma**2 ))
+	L = np.sqrt(2*np.pi*sigma**2)*np.exp(-0.5*(sum(data - model(grid,xn))**2 / sigma**2))
 	#verosimiglianza #
 	return L  
 
 
-def inrange(x,inf,sup):
-	""" This function...""" 
+def inrange(x,start,end):
+	""" This function gives us a continuos uniform distribution between 
+	sup and inf.
+	""" 
 
-	if inf<=x<=sup:
-		h=1/(sup-inf)
+	if start<=x<=end:
+		h=1/(end-start)
 	else:
 		h=0
 	return h
 
 
-def prior(xn,inf,sup): 
+def prior(xn,start,end): 
 	""" This function is a uniform and normalized function.
 	We have to consider 2 cases: xn is a number (real or integer) or xn is an array.
 	"""
 
 
 	if isinstance(xn, float) or isinstance (xn,int):
-		return inrange(xn,inf,sup)	
+		return inrange(xn,start,end)	
 	else:
 		out=np.zeros_like(xn) 
 		"""We create an array of only zeros of length xn"""
 		
 		for i,x in enumerate(xn): #prendo gli elementi dentro l'array#
-			out[i]=inrange(x,inf,sup)
+			out[i]=inrange(x,start,end)
 		return out
 			
 			
 	 
-def prob(data,grid,sigma,xn,inf,sup):
+def posterior_dist(data,grid,sigma,xn,start,end):
 	"""As in prior we consider two cases.
 	"""
 	
 	if isinstance(xn, float) or isinstance (xn,int):
-		p=likelihood(data,grid,xn,sigma)*prior(xn,inf,sup)
+		p=likelihood(data,grid,xn,sigma)*prior(xn,start,end)
 		return p
 
 	else:
 		out=np.zeros_like(xn) #creo un array di zero lungo come xn#
 		for i,x in enumerate(xn): #prendo gli elementi dentro l'array#
-			out[i]=likelihood(data,grid,x,sigma)*prior(x,inf,sup)
+			out[i]=likelihood(data,grid,x,sigma)*prior(x,start,end)
 		return out
 	
 
 
-def evidence(data,grid,sigma,out,inf,sup):
+def evidence(data,grid,sigma,out,start,end):
 
-	z=((sup-inf)*np.sum(prob(data,grid,sigma,out,inf,sup)))/len(out)
+	z=((end-start)*np.sum(posterior_dist(data,grid,sigma,out,start,end)))/len(out)
 	return z
 
 	#len è la lunghezza di out#
@@ -68,15 +70,20 @@ def evidence(data,grid,sigma,out,inf,sup):
 
 
 
-def MCMC(sigma,data,grid,init_MCMC=0,itmax=10000,inf=0,sup=2) : 
+def MCMC(sigma,data,grid,init_MCMC=0,itmax=10000,start=0,end=1) : 
 	"""This function samples a random number, which steps resemble
 	a random walk."""
 
 	"""
+	Input
 	xn : starting position
 	controll : Metropolis ratio 
 	xn1_acc : accepted value 
 	U : uniform random number 
+	
+	Output
+	samples : list, list of samples from the posterior fistribution
+	numb_accept : float, number of accepted unique samples
 	"""
 	
 	sigma=1
@@ -94,15 +101,15 @@ def MCMC(sigma,data,grid,init_MCMC=0,itmax=10000,inf=0,sup=2) :
 	for i in range (itmax):
 	
 		xn1= np.random.normal(xn,sigma)
-		controll =  prob(data,grid,sigma,xn1,inf,sup)/prob(data,grid,sigma,xn,inf,sup)
+		controll =  min(1,
+				posterior_dist(data,grid,sigma,xn1,start,end)/
+posterior_dist(data,grid,sigma,xn,start,end)
+				)
+
+
 		
-		if controll>=1 :
+		if np.random.rand()<=controll:
 			xn=xn1
-		else :
-			U = np.random.rand(1,1)
-		
-			if U<=controll:
-				xn=xn1
 				#else xn=xn#
 		if i>burnin and saved==False : 
 			out[j]=xn
@@ -111,9 +118,8 @@ def MCMC(sigma,data,grid,init_MCMC=0,itmax=10000,inf=0,sup=2) :
 		elif saved==True:
 			saved=False
 
-	zeta=evidence(data,grid,sigma,out,inf,sup)
-	posterior=prob(data,grid,sigma,out,inf,sup)/zeta
-	return out,zeta,posterior		
+	
+	return out		
 
 
 
