@@ -1,14 +1,15 @@
 import numpy as np
+from numba import njit
 
-
-
-def model(x,b):
+@njit
+def model(x,params):
+	
 	"""
 	This function computes the analytic model that we will try to recover. 
 	x is the independent variable, b is the parameter.
 	"""
-
-	return b*x 
+	a,b,c=params
+	return a*x*np.sin(b*x+c) 
 
 
 
