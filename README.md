@@ -84,6 +84,8 @@ In [bayesian_inference](https://github.com/giulava/esame-/blob/main/bayesian_inf
 In [test](https://github.com/giulava/esame-/tree/main/test) we have hypothesis testing that check the correct action of functions. 
 
 This is what we got by inserting the function $y=Ax\cdot sin(bx+c)$
+
+
 <img width="1134" alt="Schermata 2022-09-28 alle 20 54 05" src="https://user-images.githubusercontent.com/113693199/192865934-b96578c9-a672-46d7-b307-95d34da28bd5.png">
 
 
