@@ -5,10 +5,12 @@ from analytic_model import fakedata,model
 
 __author__ = 'Giulia Avato'
 __email__ = 'giulia.avato@studio.unibo.it'	
-__version__='0.6.0'
+__version__='1.0.0'
 
 
 def main():
+	"""Input
+	"""
 	init_MCMC=np.array([0.5,0.5,0.5], dtype = np.float64)
 	itmax=1000000
 	n=50
@@ -24,6 +26,8 @@ def main():
 	posteriorA=posterior[:,0]
 	posteriorB=posterior[:,1]	
 	posteriorC=posterior[:,2]
+	
+	#plots
 	
 	plt.figure()
 	plt.hist(posteriorA, bins = 100, histtype='step', density = True, label='histogram') 
