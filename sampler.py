@@ -4,18 +4,19 @@ from analytic_model import fakedata,model
 
 __author__ = 'Giulia Avato'
 __email__ = 'giulia.avato@studio.unibo.it'
-__version__ = '0.6.0'
+__version__ = '1.0.0'
 
 
 
 @njit
-def likelihood(data,grid,xn,sigma):
+def likelihood(data, grid, xn, sigma):
+	""" This function gives us the likelihood once having experimental data$
+        """
 	L =np.exp(-0.5*(np.sum((data - model(grid,xn))**2)) / sigma**2)/np.sqrt(2*np.pi*sigma**2)
-	#print (data - model(grid,xn))	#verosimiglianza #
 	return L  
 
 @njit
-def inrange(x,start,end):
+def inrange(x, start, end):
 	""" This function gives us a continuos uniform distribution between 
 	sup and inf.
 	""" 
@@ -29,10 +30,9 @@ def inrange(x,start,end):
 @njit
 def prior(params, start, end):
 
+	"""This function computes the normalized value of the uniform prior in a point of parameter space.
 	"""
-	Computes the normalized value of the uniform prior in a point of parameter space.
-
-	"""
+	
 	Vol= np.prod(end-start)
 	out= np.zeros(len(params))
 	i= 0
@@ -51,14 +51,10 @@ def prior(params, start, end):
 		return 1/Vol
 
 @njit
-def check(value,start,end):
+def check(value, start, end):
 
-	"""
-
-	This function checks if a value is between two limits.
-
+	"""This function checks if a value is between two limits.
 	It implements uniform prior in a range.
-
 	"""
 
 	if start <= value <= end:
@@ -70,62 +66,32 @@ def check(value,start,end):
 
 
 
-#def prior(xn,start,end): 
-	""" This function is a uniform and normalized function.
-	We have to consider 2 cases: xn is a number (real or integer) or xn is an array.
-	"""
-
-
-	#if isinstance(xn, float) or isinstance (xn,int):
-		#return inrange(xn,start,end)	
-	#else:
-		#out=np.zeros_like(xn) 
-		#We create an array of only zeros of length xn
-		
-		#for i,x in enumerate(xn): #prendo gli elementi dentro l'array#
-			#out[i]=inrange(x,start,end)
-		#return out
-			
 			
 @njit	 
-def posterior_dist(data,grid,sigma,xn,start,end):
-	"""As in prior we consider two cases.
+def posterior_dist(data, grid, sigma, xn, start, end):
+	""" This function is the posterior distribution that depends on likelihood.
 	"""
 	
-	#if isinstance(xn, float) or isinstance (xn,int):
 	p=likelihood(data,grid,xn,sigma)*prior(xn,start,end)
 	return p
-
-	#else:
-		#out=np.zeros_like(xn) #creo un array di zero lungo come xn#
-		#for i,x in enumerate(xn): #prendo gli elementi dentro l'array#
-			#out[i,:]=likelihood(data,grid,x,sigma)*prior(x,start,end)
-		#return out
-	
-
-
-#def evidence(data,grid,sigma,out,start,end):
-
-	#z=((end-start)*np.sum(posterior_dist(data,grid,sigma,out,start,end)))/len(out)
-	#return z
-
-	#len è la lunghezza di out#
 
 
 
 @njit
-def MCMC(sigma,data,grid,init_MCMC=0,itmax=10000,start=0,end=1) : 
+def MCMC(sigma, data, grid, init_MCMC=0, itmax=10000, start=0, end=1) : 
 	"""This function samples a random number, which steps resemble
 	a random walk.
 
 	
-	Input
 	xn : starting position
-	controll : Metropolis ratio 
+        posterior_dist : posterior distribution
+        controll : Metropolis ratio
 	 
 	
 	Output
-	samples : list, list of samples from the posterior fistribution
+	
+	out : list, list of accepted steps from the posterior distribution
+
 	"""
 	
 	
@@ -145,19 +111,20 @@ def MCMC(sigma,data,grid,init_MCMC=0,itmax=10000,start=0,end=1) :
 		xn1=np.array([np.random.normal(xn[i],sigma) for i in range(len(xn))], dtype = np.float64)
 		
 		controll = min(1,
-				posterior_dist(data,grid,sigma,xn1,start,end)/
-posterior_dist(data,grid,sigma,xn,start,end)
+				posterior_dist(data, grid, sigma, xn1, start, end)/posterior_dist(data, grid, sigma, xn, start, end)
 				)
 
 
 		
 		if np.random.rand()<=controll:
 			xn=xn1
-				#else xn=xn#
+				
+			
 		if i>burnin and saved==False : 
 			out[j,:]=xn
 			saved=True
 			j+=1
+		
 		elif saved==True:
 			saved=False
 
