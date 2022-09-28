@@ -49,7 +49,7 @@ $r=\frac{p(y)q(x_{n}|y)}{p(x_{n})q(y|x_{n})}$
   * if $r\geq 1$ the proposed value is accepted. 
   * if $r\lt 1$ a uniform random number $U$ is sampled. If $U\leq 1$ the psoposal is accepted, otherwise it is rejected and $x_{n+1}\equiv x_{n}$
 
-For more information on the MCMC click the following link [MCMC](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiym7Xg2Lf6AhXJvKQKHZFgDskQFnoECB8QAQ&url=https%3A%2F%2Farxiv.org%2Fpdf%2F1909.12313&usg=AOvVaw3NXVML5qyA2WoXTM2zVW48)
+For more information on the MCMC click the following link [MCMC](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiym7Xg2Lf6AhXJvKQKHZFgDskQFnoECB8QAQ&url=https%3A%2F%2Farxiv.org%2Fpdf%2F1909.12313&usg=AOvVaw3NXVML5qyA2WoXTM2zVW48).
 
 ## 5. Our work
 #### Before you analyze the code, there are a two things to keep in mind:
@@ -62,9 +62,10 @@ Of course in this case **we** have to give the function (from which to get the p
    $G(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}$ 
 
    where $\sigma^{2}$ is the variance and $\mu$ the expected value.
+   
    This distribution will perturb the analytical data of the function.
 
-
+As you can see 
 
 
 
