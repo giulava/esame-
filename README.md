@@ -1,1 +1,49 @@
-# Monte Carlo Markov Chain for Bayesian Inference -
+# Monte Carlo Markov Chain (MCMC) for Bayesian inference 
+## 1. *Why Bayesian inference?*
+#### Bayesian inference is usually used to make statements about the Universe based on data. 
+In particular in gravitational-wave astronomy Bayesian inference allows us to reconstruct sky maps of where an astrophysical event has occurred. 
+#### First of all we have to construct a posterior distribution 
+$p(\theta |d)$
+
+where $\theta$ is a set of parameters and $d$ the experimental data.
+
+The posterior distribution is what we use to construct credible intervals that gives us informations about the parameters.
+
+According to **Bayes** theorem, the posterior distribution is given by
+
+$p(\theta|d))=\frac{\mathcal{L}(d|\theta)\pi(\theta)}{\mathcal{Z}}$
+
+where 
+
+* $\mathcal{L}(d|\theta)$ is the **likelihood function** of the data given the parameters
+* $\pi(\theta)$ is the **prior distribution** for $\theta$
+* $\mathcal{Z}$ is the normalisation factor called **evidence**
+
+The likelihood function is something we choose as a Gaussian
+
+$\mathcal{L}(d|\theta)=\frac{1}{\sqrt{2\pi\sigma^{2}}}exp \big( -\frac{1}{2}\frac{(d-\mu(\theta))^{2}}{\sigma^{2}}\big)$
+
+to simulate the noise genereted during data acquisition.
+
+Like the likelihood function, the prior is something we get to choose. 
+
+In most cases it is reasonable to choose a prior that weights each ?? element ??  as equally probable and for this reason we choose a **continuos uniform distribution** in a given interval. 
+## 2. *Where's the catch? (problem)?*
+#### Let's imagine that we want to calculate the posterior probability for the 15 parameters describing a binary black hole merger.
+Even if we create a grid with 10 bins in evert dimension and we evaluate the likelihood at each grid pont our calculation suffers from the curse of the dimensionality (it is computationally impossible to carry out $10^{15}$ likelihood evaluations. 
+Of course the problem becomes worse as we add dimensions. 
+## 3. *What's the solution?*
+#### The solution is to use a **stochastic sampler** divided into two methods: 
+* **Markiv chain Monte Carlo (MCMC)** 
+* **nested sampling**
+In our case we will consider only the MCMC algorithm. 
+## 4. *MCMC*
+####  In MCMC methods, "walkers" undergo a **random walk** through the posterior distribution where the probability of moving to any given point is determined by the transition probability of the Markov chain.
+By noting the position of walkers we generate draws from the posterior probability distribution.
+Pratically, this is achieved in two steps:
+* At first a *proposed value* $x_{n+1}=y$ is chosen from a *proposal distribution* $q(y|x_{n})$. This corresponds to the random change of the system's state in the example presented at the beginning. 
+* We have to decide whether or not $y$ has to be accepted as the $(n+1)$-th element of the Markov chain. 
+This is done on the basis of the *Metropolis ratio*
+$r=\frac{p(y)q(x_{n}|y)}{p(x_{n})q(y|x_{n})}$ 
+  * if $r\geq 1$ the proposed value is accepted. 
+  * if $r\lt 1$ a uniform random number $U$ is sampled. If $U\leq 1$ the psoposal is accepted, otherwise it is rejected and $x_{n+1}\equiv x_{n}$
