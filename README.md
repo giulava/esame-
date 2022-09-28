@@ -65,13 +65,26 @@ Of course in this case **we** have to give the function (from which to get the p
    
    This distribution will perturb the analytical data of the function.
 
-As you can see 
+As you can see there are four files. 
+
+In [analytic_model](https://github.com/giulava/esame-/blob/main/analytic_model.py) we have: 
+  * The function we will try to recover
+  * The noise to be superimposed to the model 
+  * The computed experimental data points
 
 
+In [sampler](https://github.com/giulava/esame-/blob/main/sampler.py) we have: 
+  * The likelihood 
+  * The prior distribution 
+  * The posterior distribution 
+  * The MCMC algorithm
+  
+In [bayesian_inference](https://github.com/giulava/esame-/blob/main/bayesian_inference.py) we have the main part of the code that gives us the plots of the function with the estimated parameters.
 
+In [test](https://github.com/giulava/esame-/tree/main/test) we have hypothesis testing that check the correct action of functions. 
 
-
-
+This is what we got by inserting the function $y=Ax\cdot sin(bx+c)$
+(/image/bayesian_inference.png)
 
 
 
