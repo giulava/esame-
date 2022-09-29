@@ -29,7 +29,7 @@ to simulate the noise genereted during data acquisition.
 
 Like the likelihood function, the prior is something we get to choose. 
 
-In most cases it is reasonable to choose a prior that weights each ?? element ??  as equally probable and for this reason we choose a **continuos uniform distribution** in a given interval. 
+In most cases it is reasonable to choose a prior that weights each element as equally probable and for this reason we choose a **continuos uniform distribution** in a given interval. 
 ## 2. *Where's the problem?*
 #### Let's imagine that we want to calculate the posterior probability for the 15 parameters describing a binary black hole merger.
 Even if we create a grid with 10 bins in evert dimension and we evaluate the likelihood at each grid pont our calculation suffers from the curse of the dimensionality (it is computationally impossible to carry out $10^{15}$ likelihood evaluations. 
