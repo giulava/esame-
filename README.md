@@ -26,6 +26,7 @@ $\mathcal{L}(d|\theta)=\frac{1}{\sqrt{2\pi\sigma^{2}}}exp \big( -\frac{1}{2}\fra
 to simulate the noise genereted during data acquisition.
 * $\sigma^{2}$ is the so called **variance**
 * $\mu$ is the **expected value**
+
 Like the likelihood function, the prior is something we get to choose. 
 
 In most cases it is reasonable to choose a prior that weights each ?? element ??  as equally probable and for this reason we choose a **continuos uniform distribution** in a given interval. 
