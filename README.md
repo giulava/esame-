@@ -39,6 +39,7 @@ Of course the problem becomes worse as we add dimensions.
 #### The solution is to use a **stochastic sampler** divided into two methods: 
 * **Markiv chain Monte Carlo (MCMC)** 
 * **nested sampling**
+
 In our case we will consider only the MCMC algorithm. 
 ## 4. *MCMC*
 ####  In MCMC methods, "walkers" undergo a **random walk** through the posterior distribution where the probability of moving to any given point is determined by the transition probability of the Markov chain.
