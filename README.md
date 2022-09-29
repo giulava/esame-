@@ -68,6 +68,12 @@ Of course in this case **we** have to give the function (from which to get the p
    
    This distribution will perturb the analytical data of the function.
 
+4. As a proposal distribution $q(y|x_{n})$ we choose a flat distribution and in this case $q(x_{n}|y)=q(y|x_{n})$.
+
+So our Metropolis ratio is simply $r=\frac{p(y)}{p(x_{n})}$
+
+5. I our model the normalization is not significant and for this reason the posterior distribution will be only the product between the likelihood and the prior: $p(\theta|d)=\mahtcal{L(d|\theta)\cdot \pi(\theta)}$
+
 As you can see there are four files. 
 
 In [analytic_model](https://github.com/giulava/esame-/blob/main/analytic_model.py) we have: 
