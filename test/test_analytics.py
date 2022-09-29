@@ -10,9 +10,9 @@ sys.path.append("../")
 from analytic_model import *
 
 def test_model():
-	a=1
-	b=1
-	c=0
+	a=0.5
+	b=0.5
+	c=0.5
 	modelv=np.array([0.5,1.5,3.5,6.5])
 		#Modelv contains exact values#
 	x=np.array([0,1,2,3])
