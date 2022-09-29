@@ -44,7 +44,7 @@ def prior(params, start, end):
 		i= i + 1
 
     
-	if np.any(out)==False  : #se uno qualunque dei parametri è fuori dall'intervallo
+	if np.any(out)==False  : #if any of the parameters are out of range
 		
 		return 0
 	else:
