@@ -15,17 +15,6 @@ def likelihood(data, grid, xn, sigma):
 	L =np.exp(-0.5*(np.sum((data - model(grid,xn))**2)) / sigma**2)/np.sqrt(2*np.pi*sigma**2)
 	return L  
 
-@njit
-def inrange(x, start, end):
-	""" This function gives us a continuos uniform distribution between 
-	sup and inf.
-	""" 
-
-	if start<=x<=end:
-		h=1/(end-start)
-	else:
-		h=0
-	return h
 
 @njit
 def prior(params, start, end):
