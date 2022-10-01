@@ -1,7 +1,7 @@
 # Markov chain Monte Carlo(MCMC) for Bayesian inference 
 ## 1. *Why Bayesian inference?*
 #### Bayesian inference is usually used to make statements about the Universe based on data. 
-In particular in gravitational-wave astronomy Bayesian inference allows us to reconstruct sky maps of where an astrophysical event has occurred. 
+For example in gravitational-wave astronomy Bayesian inference allows us to reconstruct sky maps of where an astrophysical event has occurred. 
 #### First of all we have to construct a posterior distribution 
 $p(\theta |d)$
 
@@ -11,7 +11,7 @@ The posterior distribution is what we use to construct credible intervals that g
 
 According to **Bayes** theorem, the posterior distribution is given by
 
-$p(\theta|d))=\frac{\mathcal{L}(d|\theta)\pi(\theta)}{\mathcal{Z}}$
+$p(\theta|d)=\frac{\mathcal{L}(d|\theta)\pi(\theta)}{\mathcal{Z}}$
 
 where 
 
@@ -19,7 +19,7 @@ where
 * $\pi(\theta)$ is the **prior distribution** for $\theta$
 * $\mathcal{Z}$ is the normalisation factor called **evidence**
 
-The likelihood function is something we choose as a Gaussian
+The likelihood function is usually choosen as a Gaussian
 
 $\mathcal{L}(d|\theta)=\frac{1}{\sqrt{2\pi\sigma^{2}}}exp \big( -\frac{1}{2}\frac{(d-\mu(\theta))^{2}}{\sigma^{2}}\big)$
 
@@ -36,7 +36,9 @@ Even if we create a grid with 10 bins in evert dimension and we evaluate the lik
 
 Of course the problem becomes worse as we add dimensions. 
 ## 3. *What's the solution?*
-#### The solution is to use a **stochastic sampler** divided into two methods: 
+#### The solution is to use a **stochastic sampler**. T
+
+There are various algorithms such as
 * **Markiv chain Monte Carlo (MCMC)** 
 * **nested sampling**
 
@@ -45,12 +47,12 @@ In our case we will consider only the MCMC algorithm.
 ####  In MCMC methods, "walkers" undergo a **random walk** through the posterior distribution where the probability of moving to any given point is determined by the transition probability of the Markov chain.
 By noting the position of walkers we generate draws from the posterior probability distribution.
 Pratically, this is achieved in two steps:
-1. At first a *proposed value* $x_{n+1}=y$ is chosen from a *proposal distribution* $q(y|x_{n})$. This corresponds to the random change of the system's state in the example presented at the beginning. 
+1. At first a *proposed value* $x_{n+1}=y$ is chosen from a *proposal distribution* $q(y|x_{n})$. This corresponds to the random change of the system's state. 
 2. We have to decide whether or not $y$ has to be accepted as the $(n+1)$-th element of the Markov chain. 
 This is done on the basis of the *Metropolis ratio*
 $r=\frac{p(y)q(x_{n}|y)}{p(x_{n})q(y|x_{n})}$ 
   * if $r\geq 1$ the proposed value is accepted. 
-  * if $r\lt 1$ a uniform random number $U$ is sampled. If $U\leq 1$ the psoposal is accepted, otherwise it is rejected and $x_{n+1}\equiv x_{n}$
+  * if $r\lt 1$ a uniform random number $U$ is sampled. If $U\leq r$ the psoposal is accepted, otherwise it is rejected and $x_{n+1}\equiv x_{n}$
 
 For more information on the MCMC click the following link [MCMC](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiym7Xg2Lf6AhXJvKQKHZFgDskQFnoECB8QAQ&url=https%3A%2F%2Farxiv.org%2Fpdf%2F1909.12313&usg=AOvVaw3NXVML5qyA2WoXTM2zVW48).
 
@@ -69,9 +71,9 @@ Of course in this case **we** have to give the function (from which to get the p
    This distribution will perturb the analytical data of the function.
 
 4. As a proposal distribution $q(y|x_{n})$ we choose a uniform distribution and in this case $q(x_{n}|y)=q(y|x_{n})$.
-   So our Metropolis ratio is simply $r=\frac{p(y)}{p(x_{n})}$
+   So our Metropolis ratio is simply $r=\frac{p(y)}{p(x_{n})}$ and is called Metropolis-hasting.
 
-5. I our model the normalization is not significant and for this reason the posterior distribution will be only the product between the likelihood and the prior: $p(\theta|d))=\mathcal{L}(d|\theta)\pi(\theta)$
+5. In our model the normalization is not significant and for this reason the posterior distribution will be only the product between the likelihood and the prior: $p(\theta|d))=\mathcal{L}(d|\theta)\pi(\theta)$
 
 As you can see there are four files. 
 
