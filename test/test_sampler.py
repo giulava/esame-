@@ -1,22 +1,23 @@
 import pytest
 import numpy as np
-from numpy.testing import assert_array_equal, assert_allclose
+from numpy.testing import assert_allclose
 
 
 
 
 import sys
 sys.path.append("../")
-from analytic_model import fakedata, model
 from sampler import *
 
 
-def test_inrange():
-        start=0
+def test_check():
+        start=1
         end=2
 
-        inrangev=np.array([0,0,1,1,0,0])
-                #inrangev contains exact values#
-        x=np.array([-1,-0.5,0.5,0.8,2,3])
-        inranget=inrange(x,start,end)
-        assert_array_equal(inrangev,inranget)
+        checkc=np.array([0,0,1,1,0,0])
+                #checkv contains exact values#
+        x=np.array([0,0.5,1.5,1.8,3,4])
+        checkt=np.zeros_like(x)
+        for i,e in enumerate(x)
+                check[i]=check(e,start,end)
+        assert_allclose(checkv,checkt)
