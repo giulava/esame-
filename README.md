@@ -36,7 +36,7 @@ Even if we create a grid with 10 bins in evert dimension and we evaluate the lik
 
 Of course the problem becomes worse as we add dimensions. 
 ## 3. *What's the solution?*
-#### The solution is to use a **stochastic sampler**. T
+#### The solution is to use a **stochastic sampler**. 
 
 There are various algorithms such as
 * **Markiv chain Monte Carlo (MCMC)** 
@@ -52,7 +52,7 @@ Pratically, this is achieved in two steps:
 This is done on the basis of the *Metropolis ratio*
 $r=\frac{p(y)q(x_{n}|y)}{p(x_{n})q(y|x_{n})}$ 
   * if $r\geq 1$ the proposed value is accepted. 
-  * if $r\lt 1$ a uniform random number $U$ is sampled. If $U\leq r$ the psoposal is accepted, otherwise it is rejected and $x_{n+1}\equiv x_{n}$
+  * if $r\lt 1$ a uniform random number $U$ is sampled. If $U\leq r$ the proposal is accepted, otherwise it is rejected and $x_{n+1}\equiv x_{n}$
 
 For more information on the MCMC click the following link [MCMC](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiym7Xg2Lf6AhXJvKQKHZFgDskQFnoECB8QAQ&url=https%3A%2F%2Farxiv.org%2Fpdf%2F1909.12313&usg=AOvVaw3NXVML5qyA2WoXTM2zVW48).
 
