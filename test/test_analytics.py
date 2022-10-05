@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from numpy.testing import assert_array_equal, assert_allclose
+from numpy.testing import assert_allclose
 
 
 
@@ -13,8 +13,9 @@ def test_model():
 	a=0.5
 	b=0.5
 	c=0.5
-	modelv=np.array([0.5,1.5,3.5,6.5])
+	modelv=np.array([0,0.42073549,0.99749499,1.36394614])
 		#Modelv contains exact values#
+	params=np.array([a,b,c])
 	x=np.array([0,1,2,3])
-	modelt=model(x,a,b,c)
+	modelt=model(x,params)
 	assert_array_equal(modelv,modelt) 
