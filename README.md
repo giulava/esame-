@@ -98,5 +98,9 @@ This is what we got by inserting the function $y=Ax\cdot sin(bx+c)$
 
 <img width="1134" alt="Schermata 2022-09-28 alle 20 54 05" src="https://user-images.githubusercontent.com/113693199/192865934-b96578c9-a672-46d7-b307-95d34da28bd5.png">
 
-
+| Parameter     |               |               |             |
+| ------------- |:-------------:| -------------:|------------:|
+|       a       | 0.48570116    | + 0.01308478  | -0.01030515 |
+|       b       | 0.49231806    | + 0.01899055  | -0.01521814 |
+|       c       | 0.56737931    | + 0.08499470  | -0.12636993 |
 
