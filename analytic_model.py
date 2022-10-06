@@ -6,7 +6,7 @@ def model(x, params):
 	
 	"""
 	This function computes the analytic model that we will try to recover. 
-	x is the independent variable, b is the parameter.
+	x is the independent variable, a,b,c the parameters.
 	"""
 	a,b,c=params
 	return a*x*np.sin(b*x+c) 
