@@ -58,7 +58,7 @@ def check(value, start, end):
 			
 @njit	 
 def posterior_dist(data, grid, sigma, xn, start, end):
-	""" This function is the posterior distribution that depends on likelihood.
+	""" This function is the posterior distribution that depends on likelihood and prior.
 	"""
 	
 	p=likelihood(data,grid,xn,sigma)*prior(xn,start,end)
