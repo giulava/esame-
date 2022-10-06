@@ -19,7 +19,7 @@ def main():
 	start=np.array([0,0,0], dtype = np.float64)
 	end=np.array([2,2,2], dtype = np.float64)
 	xstart=0
-	xend=5
+	xend=10
 
 	data,grid=fakedata(xstart,xend,n,params,sigma)
 	posterior=MCMC(sigma,data,grid,init_MCMC=init_MCMC,itmax=itmax,start=start,end=end)
@@ -68,6 +68,6 @@ def main():
 
 
 if __name__=="__main__":
-	 #togliere#
+	 
 	main()
 
