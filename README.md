@@ -57,7 +57,7 @@ $r=\frac{p(y)q(x_{n}|y)}{p(x_{n})q(y|x_{n})}$
 For more information on the MCMC click the following link [MCMC](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiym7Xg2Lf6AhXJvKQKHZFgDskQFnoECB8QAQ&url=https%3A%2F%2Farxiv.org%2Fpdf%2F1909.12313&usg=AOvVaw3NXVML5qyA2WoXTM2zVW48).
 
 ## 5. *Our work*
-#### Before you analyze the code, there are a two things to keep in mind:
+#### Before you analyze the code, there are a few things to keep in mind:
 1. The program is written for $n$ parameters.
 2. We have no real experimental data and it was necessary to simulate them. 
 Of course in this case **we** have to give the function (from which to get the parameters) to the program.
