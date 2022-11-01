@@ -10,7 +10,26 @@ __version__ = '1.0.0'
 
 @njit
 def likelihood(data, grid, xn, sigma):
-	""" This function gives us the likelihood once having experimental data$
+	""" This function gives us the likelihood once having experimental data
+	
+        Input: 
+	---------
+	data: ndarray
+	drawn samples from the parameterized normal distribution.
+	
+	grid: ndarray
+	There are n equally spaced samples in the closed interval [start,end].
+	
+	xn: float
+	starting position
+	
+	sigma: float 
+	standard deviation of the distribution. Must be non-negative.
+	
+	Output
+	---------
+	L: ndarray
+	likelihood 
         """
 	L =np.exp(-0.5*(np.sum((data - model(grid,xn))**2)) / sigma**2)/np.sqrt(2*np.pi*sigma**2)
 	return L  
@@ -20,6 +39,24 @@ def likelihood(data, grid, xn, sigma):
 def prior(params, start, end):
 
 	"""This function computes the normalized value of the uniform prior in a point of parameter space.
+	
+	Input: 
+	---------
+	params: array_like of floats
+	parameters of the function.
+	
+	
+	start: float
+	beginning of function domain
+	
+	
+	end: float
+	end of function domain
+	
+	Output
+	---------
+	prior: ndarray
+	prior distribution
 	"""
 	
 	Vol= np.prod(end-start)
@@ -59,6 +96,31 @@ def check(value, start, end):
 @njit	 
 def posterior_dist(data, grid, sigma, xn, start, end):
 	""" This function is the posterior distribution that depends on likelihood and prior.
+	
+	Input: 
+	---------
+	data: ndarray
+	drawn samples from the parameterized normal distribution.
+	
+	grid: ndarray
+	There are n equally spaced samples in the closed interval [start,end].
+	
+	sigma: float 
+	standard deviation of the distribution. Must be non-negative.
+	
+	xn: float
+	starting position
+	
+	start: float
+	beginning of function domain
+	
+	end: float
+	end of function domain
+	
+	Output
+	---------
+	p: ndarray
+	posterior distribution
 	"""
 	
 	p=likelihood(data,grid,xn,sigma)*prior(xn,start,end)
@@ -70,16 +132,36 @@ def posterior_dist(data, grid, sigma, xn, start, end):
 def MCMC(sigma, data, grid, init_MCMC=0, itmax=10000, start=0, end=1) : 
 	"""This function samples a random number, which steps resemble
 	a random walk.
-
 	
-	xn : starting position
-        posterior_dist : posterior distribution
-        controll : Metropolis ratio
-	 
+	Input: 
+	---------
+	sigma: float 
+	standard deviation of the distribution. Must be non-negative.
+	
+	data: ndarray
+	drawn samples from the parameterized normal distribution.
+	
+	grid: ndarray
+	There are n equally spaced samples in the closed interval [start,end].
+	
+	init_MCMC: int
+	initial step of cycle
+	
+	itmax: int
+	ifinal step of cycle
+		
+	start: float
+	beginning of function domain
+	
+	
+	end: float
+	end of function domain
 	
 	Output
+	---------
 	
-	out : list, list of accepted steps from the posterior distribution
+	out : ndarray
+	list of accepted steps from the posterior distribution
 
 	"""
 	
