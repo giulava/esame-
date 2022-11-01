@@ -1,8 +1,13 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from analytic_model import model
+
+
 def makeplot(posteriorA,posteriorB,posteriorC,xstart,xend,grid,data):
 
 
 
-  plt.figure()
+  	plt.figure()
 	plt.hist(posteriorA, bins = 100, histtype='step', density = True, label='histogram') 
 	plt.show()
 
