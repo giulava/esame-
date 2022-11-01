@@ -20,8 +20,8 @@ def likelihood(data, grid, xn, sigma):
 	grid: ndarray
 	There are n equally spaced samples in the closed interval [start,end].
 	
-	xn: float
-	starting position
+	xn: array_like of floats
+	guessed parameters
 	
 	sigma: float 
 	standard deviation of the distribution. Must be non-negative.
@@ -29,21 +29,21 @@ def likelihood(data, grid, xn, sigma):
 	Output
 	---------
 	L: ndarray
-	likelihood 
+	likelihood values
         """
 	L =np.exp(-0.5*(np.sum((data - model(grid,xn))**2)) / sigma**2)/np.sqrt(2*np.pi*sigma**2)
 	return L  
 
 
 @njit
-def prior(params, start, end):
+def prior(xn, start, end):
 
 	"""This function computes the normalized value of the uniform prior in a point of parameter space.
 	
 	Input: 
 	---------
-	params: array_like of floats
-	parameters of the function.
+	xn: array_like of floats
+	guessed parameters
 	
 	
 	start: float
@@ -55,17 +55,17 @@ def prior(params, start, end):
 	
 	Output
 	---------
-	prior: ndarray
+	prior: float
 	prior distribution
 	"""
 	
 	Vol= np.prod(end-start)
-	out= np.zeros(len(params))
+	out= np.zeros(len(xn))
 	i= 0
 	
-	for par in params:
+	for par in xn:
 
-		out[i] = check(params[i], start[i], end[i])
+		out[i] = check(xn[i], start[i], end[i])
 
 		i= i + 1
 
@@ -81,7 +81,26 @@ def check(value, start, end):
 
 	"""This function checks if a value is between two limits.
 	It implements uniform prior in a range.
+	
+	Input: 
+	---------
+	value: float
+	guessed parameter
+	
+	
+	start: float
+	beginning of function domain
+	
+	
+	end: float
+	end of function domain
+	
+	Output
+	---------
+	_ : bool
+	returns true if value is in [start,end] else return false
 	"""
+	
 
 	if start <= value <= end:
 
@@ -100,7 +119,7 @@ def posterior_dist(data, grid, sigma, xn, start, end):
 	Input: 
 	---------
 	data: ndarray
-	drawn samples from the parameterized normal distribution.
+	experimental points 
 	
 	grid: ndarray
 	There are n equally spaced samples in the closed interval [start,end].
@@ -109,7 +128,7 @@ def posterior_dist(data, grid, sigma, xn, start, end):
 	standard deviation of the distribution. Must be non-negative.
 	
 	xn: float
-	starting position
+	guessed parameters
 	
 	start: float
 	beginning of function domain
@@ -119,7 +138,7 @@ def posterior_dist(data, grid, sigma, xn, start, end):
 	
 	Output
 	---------
-	p: ndarray
+	p: float
 	posterior distribution
 	"""
 	
@@ -139,16 +158,16 @@ def MCMC(sigma, data, grid, init_MCMC=0, itmax=10000, start=0, end=1) :
 	standard deviation of the distribution. Must be non-negative.
 	
 	data: ndarray
-	drawn samples from the parameterized normal distribution.
+	experimental points 
 	
 	grid: ndarray
 	There are n equally spaced samples in the closed interval [start,end].
 	
 	init_MCMC: int
-	initial step of cycle
+	initial guessed of the parameters
 	
 	itmax: int
-	ifinal step of cycle
+	final step of cycle
 		
 	start: float
 	beginning of function domain
@@ -161,7 +180,7 @@ def MCMC(sigma, data, grid, init_MCMC=0, itmax=10000, start=0, end=1) :
 	---------
 	
 	out : ndarray
-	list of accepted steps from the posterior distribution
+	list of accepted sample points from the posterior distribution
 
 	"""
 	
