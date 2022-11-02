@@ -1,5 +1,39 @@
 import numpy as np
 
+"""
+  
+	---------
+	init_MCMC: ndarray
+	initial guessed of the parameters
+	
+	itmax: int
+	final step of cycle
+	
+	n: int
+	number of iterations
+	
+	params: ndarray
+	parameters of the analytic function.
+	
+	sigma: float 
+	standard deviation of the distribution. Must be non-negative.
+	
+  start: float
+	beginning of function domain
+  
+  
+	end: float
+	end of function domain
+	
+  xstart: int
+  
+  initial value of the domain
+  
+  xend: int
+  final value of the domain
+	"""
+
+
 init_MCMC=np.array([0.5,0.5,0.5], dtype = np.float64)
 itmax=1000000
 n=50
