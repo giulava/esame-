@@ -18,19 +18,19 @@ import numpy as np
 	sigma: float 
 	standard deviation of the distribution. Must be non-negative.
 	
-  start: float
+        start: float
 	beginning of function domain
   
   
 	end: float
 	end of function domain
 	
-  xstart: int
+        xstart: int
   
-  initial value of the domain
+        initial value of the domain
   
-  xend: int
-  final value of the domain
+        xend: int
+        final value of the domain
 	"""
 
 
