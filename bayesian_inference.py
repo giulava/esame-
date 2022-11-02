@@ -10,7 +10,58 @@ __author__ = 'Giulia Avato'
 __email__ = 'giulia.avato@studio.unibo.it'	
 __version__='1.0.0'
 
+"""
+Main code that implements the MCMC algorithm and estimates the parameters from simulated data.
+-----
+input
 
+xstart: int
+initial value of the domain
+
+xend: int
+final value of the domain
+
+n: int
+number of iterations
+
+params: ndarray
+parameters of the analytic function
+
+sigma: float 
+standard deviation of the distribution. Must be non-negative
+	
+data:ndarray
+drawn samples from the parameterized normal distribution
+
+grid: ndarray
+There are n equally spaced samples in the closed interval [start,end].
+	
+init_MCMC: ndarray
+initial guessed of the parameters
+	
+itmax: int
+final step of cycle
+	
+start: float
+beginning of function domain
+
+end: float
+end of function domain
+
+-----
+output
+
+posteriorA: ndarray
+estimated parameter a
+
+posteriorB: ndarray
+estimated parameter b
+
+posteriorC: ndarray
+estimated parameter c
+
+
+"""
 def main():
 	
 	data,grid=fakedata(xstart,xend,n,params,sigma)
