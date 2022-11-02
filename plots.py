@@ -2,6 +2,41 @@ import matplotlib.pyplot as plt
 import numpy as np
 from analytic_model import model
 
+"""
+This function gives us the plots. 
+
+-------
+Input
+
+posteriorA: ndarray
+Estimated parameter a
+
+posteriorB: ndarray
+Estimated parameter b
+
+posteriorC: ndarray
+Estimated parameter c
+
+xstart: int
+initial value of the domain
+
+xend: int
+final value of the domain
+
+
+grid: ndarray
+There are n equally spaced samples in the closed interval [start,end].
+
+
+data: ndarray
+
+experimental points
+
+--------
+Output
+plots
+
+"""
 
 def makeplot(posteriorA,posteriorB,posteriorC,xstart,xend,grid,data):
 
